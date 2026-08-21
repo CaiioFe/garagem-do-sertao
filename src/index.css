@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 20 14% 4%;
+    --foreground: 36 20% 95%;
+
+    --card: 20 10% 9%;
+    --card-foreground: 36 20% 95%;
+    --popover: 20 10% 9%;
+    --popover-foreground: 36 20% 95%;
+
+    --primary: 22 96% 54%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 20 10% 12%;
+    --secondary-foreground: 36 15% 85%;
+
+    --muted: 20 8% 18%;
+    --muted-foreground: 24 8% 58%;
+
+    --accent: 40 90% 58%;
+    --accent-foreground: 20 14% 4%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 20 8% 18%;
+    --input: 20 8% 18%;
+    --ring: 22 96% 54%;
+    --radius: 0.75rem;
+
+    --surface: 20 10% 9%;
+    --surface-elevated: 20 9% 13%;
+
+    --sertao-orange: 22 96% 54%;
+    --sertao-amber: 40 90% 58%;
+    --sertao-dust: 30 30% 70%;
+
+    --rarity-comum: 24 6% 55%;
+    --rarity-rara: 200 80% 60%;
+    --rarity-epica: 270 80% 65%;
+    --rarity-lendaria: 42 95% 55%;
+    --rarity-mitica: 160 90% 55%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { -webkit-tap-highlight-color: transparent; }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background-image:
+      radial-gradient(1200px 600px at 50% -10%, hsl(22 96% 54% / 0.10), transparent 60%),
+      radial-gradient(800px 400px at 100% 100%, hsl(40 90% 58% / 0.06), transparent 60%);
+    background-attachment: fixed;
+    overscroll-behavior-y: none;
+  }
+
+  .heading-xl { @apply font-display text-4xl sm:text-5xl font-extrabold tracking-tight uppercase italic leading-[0.95]; }
+  .heading-lg { @apply font-display text-3xl font-bold tracking-tight uppercase italic leading-none; }
+  .heading-md { @apply font-display text-xl font-bold tracking-tight uppercase; }
+  .body-text { @apply font-sans text-base leading-relaxed text-muted-foreground; }
+  .caption-text { @apply font-sans text-sm text-muted-foreground; }
+  .label-text { @apply font-sans text-[10px] uppercase tracking-[0.14em] font-bold text-muted-foreground; }
+  .num { @apply font-mono tabular-nums; }
+}
+
+@layer utilities {
+  .surface-card {
+    background: hsl(var(--surface));
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.07), 0 4px 24px -8px rgba(0,0,0,0.5);
+  }
+  .surface-elevated {
+    background: hsl(var(--surface-elevated));
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.07), 0 8px 32px -8px rgba(0,0,0,0.6);
+  }
+  .glow-primary { box-shadow: 0 0 24px -4px hsl(var(--primary) / 0.45); }
+  .diagonal-accent { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%); }
+  .safe-bottom { padding-bottom: calc(env(safe-area-inset-bottom) + 5.5rem); }
+  .safe-top { padding-top: env(safe-area-inset-top); }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .text-stroke { -webkit-text-stroke: 1px hsl(var(--foreground) / 0.35); color: transparent; }
+  .stripes {
+    background-image: repeating-linear-gradient(135deg, hsl(var(--primary) / 0.9) 0 10px, hsl(var(--accent) / 0.9) 10px 20px);
+  }
+}
+
+/* ===== Trunfo card (holographic) ===== */
+.tcard {
+  --rx: 0deg; --ry: 0deg; --mx: 50%; --my: 50%; --op: 0;
+  position: relative;
+  aspect-ratio: 3 / 4.2;
+  border-radius: 18px;
+  transform-style: preserve-3d;
+  transform: perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 120ms ease-out;
+  will-change: transform;
+  overflow: hidden;
+  isolation: isolate;
+  background: hsl(var(--surface));
+}
+.tcard.is-active { transition: none; }
+.tcard-frame {
+  position: absolute; inset: 0; border-radius: 18px; pointer-events: none; z-index: 4;
+  padding: 2px;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+}
+.tcard-glare {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  background: radial-gradient(circle at var(--mx) var(--my), rgba(255,255,255,0.35), rgba(255,255,255,0.05) 35%, transparent 60%);
+  mix-blend-mode: overlay; opacity: var(--op); transition: opacity 200ms;
+}
+.tcard-foil {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  opacity: calc(var(--op) * 0.9);
+  background-image:
+    repeating-linear-gradient(115deg, hsl(0 100% 70% / .5) 0%, hsl(50 100% 70% / .5) 8%, hsl(120 100% 70% / .5) 16%, hsl(190 100% 70% / .5) 24%, hsl(280 100% 70% / .5) 32%, hsl(0 100% 70% / .5) 40%);
+  background-size: 300% 300%;
+  background-position: calc(var(--mx) * 1) calc(var(--my) * 1);
+  mix-blend-mode: color-dodge;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 30%, #000 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 30%, #000 100%);
+}
+.tcard-foil.foil-rara { filter: saturate(0.6) hue-rotate(160deg); }
+.tcard-foil.foil-epica { filter: saturate(1) hue-rotate(240deg); }
+.tcard-foil.foil-lendaria { filter: saturate(1.2) hue-rotate(20deg) brightness(1.1); }
+.tcard-foil.foil-mitica { filter: saturate(1.6) brightness(1.15); animation: shimmer 4s linear infinite; }
+.tcard-foil.foil-comum { opacity: 0 !important; }
+.tcard-shimmer {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,0.10) 50%, transparent 70%);
+  background-size: 200% 100%;
+  animation: shimmer 3.2s linear infinite;
+}
+.tier-comum    { --tier: var(--rarity-comum); }
+.tier-rara     { --tier: var(--rarity-rara); }
+.tier-epica    { --tier: var(--rarity-epica); }
+.tier-lendaria { --tier: var(--rarity-lendaria); }
+.tier-mitica   { --tier: var(--rarity-mitica); }

@@ -1,0 +1,14 @@
+{
+  "name": "Trunfo do Sertão",
+  "short_name": "Trunfo Sertão",
+  "description": "Cartas colecionáveis das equipes do rally 2026. Não oficial, feito por fãs.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0c0907",
+  "theme_color": "#0c0907",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
