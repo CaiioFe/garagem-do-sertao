@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useVehicles } from "@/hooks/useVehicles";
 import { useTeams } from "@/hooks/useTeams";
 import { TrunfoCard } from "@/components/card/TrunfoCard";
+import { InstallBanner } from "@/components/common/InstallBanner";
 import { Button } from "@/components/ui/button";
 import { EVENT } from "@/data/stages";
 import { PARTNERS } from "@/data/partners";
@@ -57,6 +58,8 @@ export default function Home() {
           </Link>
         </div>
       </section>
+
+      <InstallBanner />
 
       <section className="container mb-6">
         <div className="grid grid-cols-4 gap-2">

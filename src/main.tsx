@@ -27,15 +27,14 @@ createRoot(document.getElementById("root")!).render(
   </StrictMode>,
 );
 
-// O service worker cacheava bundles antigos e travava o app em tela preta depois
-// de um novo deploy (chunk lazy-load apontando pra um hash que não existe mais).
-// Sem esse risco valer a pena pra um app que depende de dado ao vivo, então
-// desregistra qualquer instalação anterior em vez de registrar um novo.
+// Service worker minimo (sem cache nenhum, ver public/sw.js) so pra habilitar
+// o botao nativo de "instalar app" no Android/Chrome. Limpa qualquer cache
+// que uma versão antiga do SW possa ter deixado pra trás.
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.getRegistrations().then((regs) => {
-    regs.forEach((r) => r.unregister());
-  });
   if ("caches" in window) {
     caches.keys().then((names) => names.forEach((n) => caches.delete(n)));
   }
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js").catch(() => {});
+  });
 }
