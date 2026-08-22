@@ -31,7 +31,6 @@ export function isStandalone(): boolean {
 
 export function isIOS(): boolean {
   if (typeof navigator === "undefined") return false;
-  if (new URLSearchParams(window.location.search).get("forceios") === "1") return true;
   return /iphone|ipad|ipod/i.test(navigator.userAgent) && !(window as any).MSStream;
 }
 
