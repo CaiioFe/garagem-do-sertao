@@ -6,7 +6,7 @@ import { EVENT } from "@/data/stages";
 import { PARTNERS } from "@/data/partners";
 import { dayOfIndex } from "@/lib/trunfo";
 import { todayISO, daysUntil } from "@/lib/dates";
-import { LayoutGrid, Users, Swords, BookOpen, Plane, Sparkles } from "lucide-react";
+import { LayoutGrid, Users, Scale, BookOpen, Plane, Sparkles } from "lucide-react";
 
 export default function Home() {
   const { data: vehicles } = useVehicles();
@@ -25,7 +25,7 @@ export default function Home() {
           Trunfo <span className="text-primary">do Sertão</span>
         </h1>
         <p className="body-text mt-2 max-w-md">
-          As cartas colecionáveis das equipes do {EVENT.name}. Cadastre seu veículo, duele, colecione.
+          As cartas colecionáveis das equipes do {EVENT.name}. Cadastre seu veículo, compare, colecione.
         </p>
 
         <div className="surface-elevated rounded-lg p-4 mt-5">
@@ -72,7 +72,7 @@ export default function Home() {
         <div className="grid grid-cols-4 gap-2">
           <QuickLink to="/cartas" icon={LayoutGrid} label="Cartas" />
           <QuickLink to="/equipes" icon={Users} label="Equipes" />
-          <QuickLink to="/duelo" icon={Swords} label="Duelo" />
+          <QuickLink to="/duelo" icon={Scale} label="Comparar" />
           <QuickLink to="/guia" icon={BookOpen} label="Guia" />
         </div>
       </section>

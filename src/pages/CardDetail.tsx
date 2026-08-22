@@ -10,7 +10,7 @@ import { addToCollection, isInCollection, getFingerprint, isOwner } from "@/lib/
 import { shareCard } from "@/lib/share";
 import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
-import { Heart, Share2, Swords, Pencil, PartyPopper } from "lucide-react";
+import { Heart, Share2, Scale, Pencil, PartyPopper } from "lucide-react";
 import { toast } from "sonner";
 import { QRCodeSVG } from "qrcode.react";
 
@@ -109,7 +109,7 @@ export default function CardDetail() {
 
       <div className="flex items-center justify-center gap-2 mb-6">
         <Button variant="outline" size="sm" className="gap-1.5" onClick={() => navigate(`/duelo?a=${vehicle.slug}`)}>
-          <Swords className="h-3.5 w-3.5" /> Duelar com essa carta
+          <Scale className="h-3.5 w-3.5" /> Comparar com outra carta
         </Button>
         {owner && (
           <Link to={`/carta/${vehicle.slug}/editar`}>

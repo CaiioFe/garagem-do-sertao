@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
-import { LayoutGrid, Users, Swords, BookOpen, Trophy } from "lucide-react";
+import { LayoutGrid, Users, Scale, BookOpen, Trophy } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const items = [
   { to: "/cartas", label: "Cartas", icon: LayoutGrid },
   { to: "/equipes", label: "Equipes", icon: Users },
-  { to: "/duelo", label: "Duelo", icon: Swords },
+  { to: "/duelo", label: "Comparar", icon: Scale },
   { to: "/ranking", label: "Ranking", icon: Trophy },
   { to: "/guia", label: "Guia", icon: BookOpen },
 ];
