@@ -5,6 +5,7 @@ import { useVehicle, useVehicles } from "@/hooks/useVehicles";
 import { TrunfoCard } from "@/components/card/TrunfoCard";
 import { getFacts, getSpecRows } from "@/lib/trunfo";
 import { addToCollection, isInCollection, getFingerprint, isOwner } from "@/lib/storage";
+import { trackView } from "@/lib/track";
 import { shareCard } from "@/lib/share";
 import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
@@ -30,8 +31,9 @@ export default function CardDetail() {
     if (vehicle) {
       setLikes(vehicle.likes_count);
       setCollected(isInCollection(vehicle.slug));
+      trackView("vehicle", vehicle.id);
     }
-  }, [vehicle]);
+  }, [vehicle?.id]);
 
   useEffect(() => {
     if (!vehicle) return;

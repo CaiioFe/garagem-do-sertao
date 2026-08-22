@@ -1,4 +1,5 @@
 import { PARTNERS, EXPEDITIONS_OFFICIAL_URL } from "@/data/partners";
+import { trackView } from "@/lib/track";
 import { ExternalLink, Instagram } from "lucide-react";
 
 export default function Expeditions() {
@@ -23,12 +24,12 @@ export default function Expeditions() {
             {p.description && <p className="caption-text mt-2">{p.description}</p>}
             <div className="flex items-center gap-3 mt-3">
               {p.site && (
-                <a href={p.site} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs font-semibold text-primary">
+                <a href={p.site} target="_blank" rel="noreferrer" onClick={() => trackView("partner", p.id)} className="inline-flex items-center gap-1 text-xs font-semibold text-primary">
                   Site <ExternalLink className="h-3 w-3" />
                 </a>
               )}
               {p.instagram && (
-                <a href={`https://instagram.com/${p.instagram}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs font-semibold text-primary">
+                <a href={`https://instagram.com/${p.instagram}`} target="_blank" rel="noreferrer" onClick={() => trackView("partner", p.id)} className="inline-flex items-center gap-1 text-xs font-semibold text-primary">
                   <Instagram className="h-3 w-3" /> @{p.instagram}
                 </a>
               )}
@@ -44,7 +45,7 @@ export default function Expeditions() {
           <div key={p.id} className="surface-card rounded-lg p-3">
             <p className="text-sm font-semibold leading-tight">{p.name}</p>
             {p.site && (
-              <a href={p.site} target="_blank" rel="noreferrer" className="caption-text !text-[11px] text-primary">
+              <a href={p.site} target="_blank" rel="noreferrer" onClick={() => trackView("partner", p.id)} className="caption-text !text-[11px] text-primary">
                 visitar site
               </a>
             )}

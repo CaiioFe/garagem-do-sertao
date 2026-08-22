@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useTeam } from "@/hooks/useTeams";
 import { useTeamVehicles } from "@/hooks/useVehicles";
@@ -7,6 +7,7 @@ import { OptimizedImage } from "@/components/ui/optimized-image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { isOwner, setOwnedToken } from "@/lib/storage";
+import { trackView } from "@/lib/track";
 import { supabase } from "@/lib/supabase";
 import { Instagram, MessageCircle, Globe, Users, Plus, Pencil, KeyRound } from "lucide-react";
 import { toast } from "sonner";
@@ -18,6 +19,10 @@ export default function TeamDetail() {
   const [claiming, setClaiming] = useState(false);
   const [code, setCode] = useState("");
   const [checking, setChecking] = useState(false);
+
+  useEffect(() => {
+    if (team) trackView("team", team.id);
+  }, [team?.id]);
 
   if (isLoading) return <div className="container py-16 text-center caption-text">Carregando equipe...</div>;
   if (!team) return <div className="container py-16 text-center body-text">Equipe não encontrada.</div>;

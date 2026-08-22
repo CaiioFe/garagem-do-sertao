@@ -3,17 +3,39 @@ import { supabase } from "@/lib/supabase";
 import { getAdminPin, setAdminPin, isAdmin } from "@/lib/storage";
 import { useTeams } from "@/hooks/useTeams";
 import { useVehicles } from "@/hooks/useVehicles";
+import { PARTNERS } from "@/data/partners";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Copy, Eye, EyeOff } from "lucide-react";
+import { Copy, Eye, EyeOff, Users, MousePointerClick, Heart } from "lucide-react";
 import { toast } from "sonner";
+
+interface Stats {
+  total_views: number;
+  unique_visitors: number;
+  total_likes: number;
+  views_by_team: { name: string; slug: string; views: number }[];
+  views_by_vehicle: { name: string; slug: string; views: number }[];
+  clicks_by_partner: { partner_id: string; clicks: number }[];
+}
 
 export default function Admin() {
   const [authed, setAuthed] = useState(isAdmin());
   const [pin, setPin] = useState("");
   const [checking, setChecking] = useState(false);
+  const [stats, setStats] = useState<Stats | null>(null);
   const { data: teams, refetch: refetchTeams } = useTeams();
   const { data: vehicles, refetch: refetchVehicles } = useVehicles();
+
+  const savedPin = getAdminPin() ?? "";
+
+  const loadStats = async (p: string) => {
+    const { data, error } = await supabase.rpc("admin_get_stats", { p_pin: p });
+    if (!error && data) setStats(data as Stats);
+  };
+
+  useEffect(() => {
+    if (authed && savedPin) loadStats(savedPin);
+  }, [authed]);
 
   const login = async () => {
     setChecking(true);
@@ -23,8 +45,6 @@ export default function Admin() {
     setAdminPin(pin.trim());
     setAuthed(true);
   };
-
-  const savedPin = getAdminPin() ?? "";
 
   const getTeamCode = async (teamId: string) => {
     const { data, error } = await supabase.rpc("admin_get_team_token", { p_pin: savedPin, p_team_id: teamId });
@@ -53,6 +73,56 @@ export default function Admin() {
   return (
     <div className="container py-6">
       <h1 className="heading-lg mb-5">Admin</h1>
+
+      {stats && (
+        <div className="mb-6">
+          <h2 className="label-text mb-2">Estatísticas</h2>
+          <div className="grid grid-cols-3 gap-2 mb-3">
+            <div className="surface-card rounded-lg p-3 text-center">
+              <Users className="h-4 w-4 mx-auto mb-1 text-primary" />
+              <p className="num text-xl font-bold">{stats.unique_visitors}</p>
+              <p className="caption-text !text-[10px]">visitantes</p>
+            </div>
+            <div className="surface-card rounded-lg p-3 text-center">
+              <MousePointerClick className="h-4 w-4 mx-auto mb-1 text-primary" />
+              <p className="num text-xl font-bold">{stats.total_views}</p>
+              <p className="caption-text !text-[10px]">visualizações</p>
+            </div>
+            <div className="surface-card rounded-lg p-3 text-center">
+              <Heart className="h-4 w-4 mx-auto mb-1 text-primary" />
+              <p className="num text-xl font-bold">{stats.total_likes}</p>
+              <p className="caption-text !text-[10px]">curtidas</p>
+            </div>
+          </div>
+
+          {stats.views_by_team.length > 0 && (
+            <div className="surface-card rounded-lg p-3 mb-2">
+              <p className="label-text mb-1.5">Equipes mais vistas</p>
+              {stats.views_by_team.map((t) => (
+                <div key={t.slug} className="flex items-center justify-between text-sm py-0.5">
+                  <span className="truncate">{t.name}</span>
+                  <span className="num font-semibold shrink-0">{t.views}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {stats.clicks_by_partner.length > 0 && (
+            <div className="surface-card rounded-lg p-3">
+              <p className="label-text mb-1.5">Cliques em expedições</p>
+              {stats.clicks_by_partner.map((c) => {
+                const partner = PARTNERS.find((p) => p.id === c.partner_id);
+                return (
+                  <div key={c.partner_id} className="flex items-center justify-between text-sm py-0.5">
+                    <span className="truncate">{partner?.name ?? c.partner_id}</span>
+                    <span className="num font-semibold shrink-0">{c.clicks}</span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      )}
 
       <h2 className="label-text mb-2">Equipes</h2>
       <div className="space-y-2 mb-6">
