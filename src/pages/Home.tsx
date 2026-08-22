@@ -1,18 +1,20 @@
 import { Link } from "react-router-dom";
 import { useVehicles } from "@/hooks/useVehicles";
+import { useTeams } from "@/hooks/useTeams";
 import { TrunfoCard } from "@/components/card/TrunfoCard";
 import { Button } from "@/components/ui/button";
 import { EVENT } from "@/data/stages";
 import { PARTNERS } from "@/data/partners";
 import { dayOfIndex } from "@/lib/trunfo";
 import { todayISO, daysUntil } from "@/lib/dates";
-import { LayoutGrid, Users, Scale, BookOpen, Plane, Sparkles } from "lucide-react";
+import { Users, LayoutGrid, BookOpen, Plane, Sparkles } from "lucide-react";
 
 export default function Home() {
   const { data: vehicles } = useVehicles();
+  const { data: teams } = useTeams();
   const total = vehicles?.length ?? 0;
   const latest = [...(vehicles ?? [])].sort((a, b) => b.card_number - a.card_number).slice(0, 4);
-  const dayCard = total > 0 ? vehicles![dayOfIndex(todayISO(), total)] : null;
+  const dayVehicle = total > 0 ? vehicles![dayOfIndex(todayISO(), total)] : null;
   const dLargada = daysUntil(EVENT.start);
   const partner = PARTNERS.find((p) => p.featured);
 
@@ -24,7 +26,7 @@ export default function Home() {
           Garagem <span className="text-primary">do Sertão</span>
         </h1>
         <p className="body-text mt-2 max-w-md">
-          As cartas colecionáveis das equipes do {EVENT.name}. Cadastre seu veículo, compare, colecione.
+          As equipes e os veículos do {EVENT.name}. Conheça quem está correndo e acompanhe a prova.
         </p>
 
         <div className="surface-elevated rounded-lg p-4 mt-5">
@@ -56,35 +58,25 @@ export default function Home() {
         </div>
       </section>
 
-      {dayCard && (
-        <section className="container mb-6">
-          <p className="label-text text-primary mb-2 flex items-center gap-1.5">
-            <Sparkles className="h-3.5 w-3.5" /> Carta do dia
-          </p>
-          <Link to={`/carta/${dayCard.slug}`} className="block max-w-[220px]">
-            <TrunfoCard vehicle={dayCard} totalCount={total} interactive={false} />
-          </Link>
-        </section>
-      )}
-
       <section className="container mb-6">
         <div className="grid grid-cols-4 gap-2">
-          <QuickLink to="/cartas" icon={LayoutGrid} label="Cartas" />
           <QuickLink to="/equipes" icon={Users} label="Equipes" />
-          <QuickLink to="/duelo" icon={Scale} label="Comparar" />
+          <QuickLink to="/cartas" icon={LayoutGrid} label="Veículos" />
           <QuickLink to="/guia" icon={BookOpen} label="Guia" />
+          <QuickLink to="/expedicoes" icon={Plane} label="Expedições" />
         </div>
       </section>
 
-      {latest.length > 0 && (
+      {teams && teams.length > 0 && (
         <section className="mb-6">
           <div className="container flex items-center justify-between mb-2">
-            <h2 className="heading-md !text-base">Últimas cartas</h2>
+            <h2 className="heading-md !text-base">Equipes cadastradas</h2>
+            <Link to="/equipes" className="caption-text text-primary">ver todas</Link>
           </div>
-          <div className="flex gap-3 overflow-x-auto no-scrollbar px-4">
-            {latest.map((v) => (
-              <Link key={v.id} to={`/carta/${v.slug}`} className="w-[42vw] shrink-0 max-w-[180px]">
-                <TrunfoCard vehicle={v} totalCount={total} interactive={false} />
+          <div className="flex gap-2 overflow-x-auto no-scrollbar px-4">
+            {teams.slice(0, 8).map((t) => (
+              <Link key={t.id} to={`/equipe/${t.slug}`} className="shrink-0 surface-card rounded-full px-3.5 py-2">
+                <span className="text-xs font-semibold whitespace-nowrap">{t.name}</span>
               </Link>
             ))}
           </div>
@@ -98,6 +90,33 @@ export default function Home() {
           <Link to="/cadastrar"><Button className="mt-3">Cadastrar equipe</Button></Link>
         </div>
       </section>
+
+      {dayVehicle && (
+        <section className="container mb-6">
+          <p className="label-text text-primary mb-2 flex items-center gap-1.5">
+            <Sparkles className="h-3.5 w-3.5" /> Veículo do dia
+          </p>
+          <Link to={`/carta/${dayVehicle.slug}`} className="block max-w-[220px]">
+            <TrunfoCard vehicle={dayVehicle} totalCount={total} interactive={false} />
+          </Link>
+        </section>
+      )}
+
+      {latest.length > 0 && (
+        <section className="mb-6">
+          <div className="container flex items-center justify-between mb-2">
+            <h2 className="heading-md !text-base">Últimos veículos</h2>
+            <Link to="/cartas" className="caption-text text-primary">ver todos</Link>
+          </div>
+          <div className="flex gap-3 overflow-x-auto no-scrollbar px-4">
+            {latest.map((v) => (
+              <Link key={v.id} to={`/carta/${v.slug}`} className="w-[42vw] shrink-0 max-w-[180px]">
+                <TrunfoCard vehicle={v} totalCount={total} interactive={false} />
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       {partner && (
         <section className="container mb-6">

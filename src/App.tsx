@@ -12,9 +12,7 @@ const TeamDetail = lazy(() => import("./pages/TeamDetail"));
 const Register = lazy(() => import("./pages/Register"));
 const TeamEdit = lazy(() => import("./pages/TeamEdit"));
 const VehicleEdit = lazy(() => import("./pages/VehicleEdit"));
-const Compare = lazy(() => import("./pages/Compare"));
 const Collection = lazy(() => import("./pages/Collection"));
-const Ranking = lazy(() => import("./pages/Ranking"));
 const Guide = lazy(() => import("./pages/Guide"));
 const Expeditions = lazy(() => import("./pages/Expeditions"));
 const Admin = lazy(() => import("./pages/Admin"));
@@ -45,9 +43,7 @@ const AppRoutes = () => (
       <Route path="/equipe/:slug/editar" element={<TeamEdit />} />
       <Route path="/equipe/:teamSlug/novo-veiculo" element={<VehicleEdit />} />
       <Route path="/cadastrar" element={<Register />} />
-      <Route path="/duelo" element={<Compare />} />
       <Route path="/colecao" element={<Collection />} />
-      <Route path="/ranking" element={<Ranking />} />
       <Route path="/guia" element={<Guide />} />
       <Route path="/expedicoes" element={<Expeditions />} />
       <Route path="/admin" element={<Admin />} />

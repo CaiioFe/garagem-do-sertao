@@ -9,7 +9,7 @@ export default function Qr() {
   const share = async () => {
     if (navigator.share) {
       try {
-        await navigator.share({ title: "Garagem do Sertão", text: "As cartas colecionáveis do rally 2026", url });
+        await navigator.share({ title: "Garagem do Sertão", text: "Equipes e veículos do rally 2026", url });
       } catch { /* cancelado */ }
     } else {
       await navigator.clipboard.writeText(url);

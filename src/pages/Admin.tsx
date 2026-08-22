@@ -109,7 +109,7 @@ export default function Admin() {
 
           {stats.views_by_vehicle.length > 0 && (
             <div className="surface-card rounded-lg p-3 mb-2">
-              <p className="label-text mb-1.5">Cartas mais vistas</p>
+              <p className="label-text mb-1.5">Veículos mais vistos</p>
               {stats.views_by_vehicle.map((v) => (
                 <div key={v.slug} className="flex items-center justify-between text-sm py-0.5">
                   <span className="truncate">{v.name}</span>
@@ -149,7 +149,7 @@ export default function Admin() {
         ))}
       </div>
 
-      <h2 className="label-text mb-2">Cartas</h2>
+      <h2 className="label-text mb-2">Veículos</h2>
       <div className="space-y-2">
         {vehicles?.map((v) => (
           <div key={v.id} className="surface-card rounded-lg p-3 flex items-center gap-2">

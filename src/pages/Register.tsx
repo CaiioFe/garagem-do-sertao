@@ -180,7 +180,7 @@ export default function Register() {
       {step === 3 && (
         <div className="space-y-5">
           <h1 className="heading-lg">Foto do veículo</h1>
-          <p className="body-text !text-sm">Capriche, é a cara da carta. Pode adicionar depois também.</p>
+          <p className="body-text !text-sm">Capriche, é a primeira coisa que aparece no perfil. Pode adicionar depois também.</p>
           <PhotoUpload folder="pending" value={photoUrl} onChange={setPhotoUrl} label="Foto do veículo" />
           <div className="flex gap-2">
             <Button variant="secondary" className="flex-1" onClick={() => setStep(2)}>Voltar</Button>

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useParams, useSearchParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { useVehicle, useVehicles } from "@/hooks/useVehicles";
 import { TrunfoCard } from "@/components/card/TrunfoCard";
@@ -9,14 +9,13 @@ import { trackView } from "@/lib/track";
 import { shareCard } from "@/lib/share";
 import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
-import { Heart, Share2, Scale, Pencil, PartyPopper } from "lucide-react";
+import { Heart, Share2, Pencil, PartyPopper } from "lucide-react";
 import { toast } from "sonner";
 import { QRCodeSVG } from "qrcode.react";
 
 export default function CardDetail() {
   const { slug } = useParams();
   const [params] = useSearchParams();
-  const navigate = useNavigate();
   const qc = useQueryClient();
   const { data: vehicle, isLoading } = useVehicle(slug);
   const { data: all } = useVehicles();
@@ -45,8 +44,8 @@ export default function CardDetail() {
     }
   }, [vehicle, params]);
 
-  if (isLoading) return <div className="container py-16 text-center caption-text">Carregando carta...</div>;
-  if (!vehicle) return <div className="container py-16 text-center body-text">Carta não encontrada.</div>;
+  if (isLoading) return <div className="container py-16 text-center caption-text">Carregando veículo...</div>;
+  if (!vehicle) return <div className="container py-16 text-center body-text">Veículo não encontrado.</div>;
 
   const facts = getFacts(vehicle.history ?? {});
   const specRows = getSpecRows(vehicle.specs ?? {});
@@ -66,7 +65,7 @@ export default function CardDetail() {
   const collect = () => {
     addToCollection(vehicle.slug);
     setCollected(true);
-    toast.success("Carta adicionada à sua coleção!");
+    toast.success("Veículo adicionado à sua coleção!");
   };
 
   const doShare = async () => {
@@ -74,7 +73,7 @@ export default function CardDetail() {
     setSharing(true);
     const ok = await shareCard(cardRef.current, `${vehicle.slug}.png`, `${vehicle.name} · Garagem do Sertão`);
     setSharing(false);
-    if (!ok) toast.error("Não deu pra compartilhar. Tente baixar a carta.");
+    if (!ok) toast.error("Não deu pra compartilhar. Tente baixar a imagem.");
   };
 
   return (
@@ -83,8 +82,8 @@ export default function CardDetail() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/90 backdrop-blur-sm animate-slide-up" onClick={() => setShowAcquired(false)}>
           <div className="text-center">
             <PartyPopper className="h-12 w-12 text-primary mx-auto mb-3" />
-            <p className="heading-lg text-primary">Carta adquirida!</p>
-            <p className="body-text mt-1">{vehicle.name} agora é sua.</p>
+            <p className="heading-lg text-primary">Veículo adquirido!</p>
+            <p className="body-text mt-1">{vehicle.name} agora é seu.</p>
           </div>
         </div>
       )}
@@ -93,7 +92,7 @@ export default function CardDetail() {
         <TrunfoCard vehicle={vehicle} totalCount={all?.length} />
       </div>
 
-      <div className="flex items-center justify-center gap-2 mb-5">
+      <div className="flex items-center justify-center gap-2 mb-6 flex-wrap">
         <Button variant={liked ? "default" : "secondary"} size="sm" className="gap-1.5" onClick={toggleLike}>
           <Heart className={`h-4 w-4 ${liked ? "fill-current" : ""}`} /> {likes}
         </Button>
@@ -102,12 +101,6 @@ export default function CardDetail() {
         </Button>
         <Button variant="secondary" size="sm" className="gap-1.5" onClick={doShare} disabled={sharing}>
           <Share2 className="h-4 w-4" /> {sharing ? "..." : "Compartilhar"}
-        </Button>
-      </div>
-
-      <div className="flex items-center justify-center gap-2 mb-6">
-        <Button variant="outline" size="sm" className="gap-1.5" onClick={() => navigate(`/duelo?a=${vehicle.slug}`)}>
-          <Scale className="h-3.5 w-3.5" /> Comparar com outra carta
         </Button>
         {owner && (
           <Link to={`/carta/${vehicle.slug}/editar`}>
@@ -161,7 +154,7 @@ export default function CardDetail() {
         <QRCodeSVG value={`${cardUrl}?c=1`} size={72} bgColor="transparent" fgColor="hsl(36, 20%, 95%)" />
         <div>
           <p className="label-text mb-1">Colecionar</p>
-          <p className="caption-text !text-xs">Escaneie pra adicionar essa carta à sua coleção.</p>
+          <p className="caption-text !text-xs">Escaneie pra adicionar esse veículo à sua coleção.</p>
         </div>
       </div>
     </div>

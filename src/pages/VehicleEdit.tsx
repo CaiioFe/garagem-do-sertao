@@ -74,24 +74,24 @@ export default function VehicleEdit() {
       const { error } = await supabase.rpc("update_vehicle", { p_vehicle_id: vehicle!.id, p_token: token, p: payload });
       setSaving(false);
       if (error) { toast.error("Não deu pra salvar."); return; }
-      toast.success("Carta atualizada!");
+      toast.success("Veículo atualizado!");
       navigate(`/carta/${vehicle!.slug}`);
     }
   };
 
   const remove = async () => {
     if (!vehicle) return;
-    if (!confirm("Apagar essa carta? Não dá pra desfazer.")) return;
+    if (!confirm("Apagar esse veículo? Não dá pra desfazer.")) return;
     const token = getOwnedToken(effectiveTeam.id)!;
     const { error } = await supabase.rpc("delete_vehicle", { p_vehicle_id: vehicle.id, p_token: token });
     if (error) { toast.error("Não deu pra apagar."); return; }
-    toast.success("Carta removida.");
+    toast.success("Veículo removido.");
     navigate(`/equipe/${effectiveTeam.slug}`);
   };
 
   return (
     <div className="container py-6 max-w-sm space-y-4">
-      <h1 className="heading-lg">{isCreate ? "Novo veículo" : "Editar carta"}</h1>
+      <h1 className="heading-lg">{isCreate ? "Novo veículo" : "Editar veículo"}</h1>
 
       <PhotoUpload folder={`vehicles/${effectiveTeam.slug}`} value={form.photo_url} onChange={(url) => setForm((f: any) => ({ ...f, photo_url: url }))} />
 
@@ -147,7 +147,7 @@ export default function VehicleEdit() {
       <Button className="w-full" onClick={save} disabled={saving || !form.name}>{saving ? "Salvando..." : isCreate ? "Cadastrar veículo" : "Salvar alterações"}</Button>
       {!isCreate && (
         <Button variant="outline" className="w-full gap-1.5 text-destructive" onClick={remove}>
-          <Trash2 className="h-3.5 w-3.5" /> Apagar carta
+          <Trash2 className="h-3.5 w-3.5" /> Apagar veículo
         </Button>
       )}
     </div>

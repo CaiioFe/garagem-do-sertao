@@ -97,7 +97,7 @@ export default function TeamDetail() {
         </div>
       )}
 
-      <h2 className="heading-md !text-base mb-3">Cartas da equipe</h2>
+      <h2 className="heading-md !text-base mb-3">Veículos da equipe</h2>
       {!vehicles || vehicles.length === 0 ? (
         <p className="body-text py-8 text-center">Ainda sem veículos cadastrados.</p>
       ) : (

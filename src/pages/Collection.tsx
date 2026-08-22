@@ -38,7 +38,7 @@ export default function Collection() {
   return (
     <div className="container py-6">
       <h1 className="heading-lg mb-1">Minha coleção</h1>
-      <p className="body-text mb-3">{owned.length} de {total} cartas colecionadas.</p>
+      <p className="body-text mb-3">{owned.length} de {total} veículos colecionados.</p>
 
       <div className="h-2 rounded-full bg-muted overflow-hidden mb-5">
         <div className="h-full bg-primary transition-all" style={{ width: `${total ? (owned.length / total) * 100 : 0}%` }} />
@@ -54,8 +54,8 @@ export default function Collection() {
         <div className="text-center py-16">
           <Layers className="h-10 w-10 mx-auto text-muted-foreground/30 mb-3" />
           <p className="body-text">Sua coleção está vazia.</p>
-          <p className="caption-text mt-1">Escaneie o QR de uma carta na Vila pra começar a colecionar.</p>
-          <Link to="/cartas"><Button className="mt-4">Ver todas as cartas</Button></Link>
+          <p className="caption-text mt-1">Escaneie o QR de um veículo na Vila pra começar a colecionar.</p>
+          <Link to="/cartas"><Button className="mt-4">Ver todos os veículos</Button></Link>
         </div>
       ) : (
         <div className="grid grid-cols-2 gap-3">
