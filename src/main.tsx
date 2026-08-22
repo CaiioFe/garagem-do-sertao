@@ -34,7 +34,5 @@ if ("serviceWorker" in navigator) {
   if ("caches" in window) {
     caches.keys().then((names) => names.forEach((n) => caches.delete(n)));
   }
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("/sw.js").catch(() => {});
-  });
+  navigator.serviceWorker.register("/sw.js").catch(() => {});
 }
