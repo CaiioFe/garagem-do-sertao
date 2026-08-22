@@ -107,6 +107,18 @@ export default function Admin() {
             </div>
           )}
 
+          {stats.views_by_vehicle.length > 0 && (
+            <div className="surface-card rounded-lg p-3 mb-2">
+              <p className="label-text mb-1.5">Cartas mais vistas</p>
+              {stats.views_by_vehicle.map((v) => (
+                <div key={v.slug} className="flex items-center justify-between text-sm py-0.5">
+                  <span className="truncate">{v.name}</span>
+                  <span className="num font-semibold shrink-0">{v.views}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
           {stats.clicks_by_partner.length > 0 && (
             <div className="surface-card rounded-lg p-3">
               <p className="label-text mb-1.5">Cliques em expedições</p>
