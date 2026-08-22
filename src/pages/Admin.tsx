@@ -5,7 +5,7 @@ import { useTeams } from "@/hooks/useTeams";
 import { useVehicles } from "@/hooks/useVehicles";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Copy, Eye, EyeOff, Star, StarOff } from "lucide-react";
+import { Copy, Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
 
 export default function Admin() {
@@ -40,12 +40,6 @@ export default function Admin() {
     kind === "team" ? refetchTeams() : refetchVehicles();
   };
 
-  const toggleFeatured = async (kind: "team" | "vehicle", id: string, current: boolean) => {
-    const { error } = await supabase.rpc("admin_set_featured", { p_pin: savedPin, p_kind: kind, p_id: id, p_featured: !current });
-    if (error) { toast.error("Erro."); return; }
-    kind === "team" ? refetchTeams() : refetchVehicles();
-  };
-
   if (!authed) {
     return (
       <div className="container py-16 max-w-xs mx-auto text-center">
@@ -66,9 +60,6 @@ export default function Admin() {
           <div key={t.id} className="surface-card rounded-lg p-3 flex items-center gap-2">
             <span className="flex-1 text-sm font-semibold truncate">{t.name}</span>
             <Button variant="ghost" size="sm" onClick={() => getTeamCode(t.id)}><Copy className="h-3.5 w-3.5" /></Button>
-            <Button variant="ghost" size="sm" onClick={() => toggleFeatured("team", t.id, t.featured)}>
-              {t.featured ? <Star className="h-3.5 w-3.5 text-primary" /> : <StarOff className="h-3.5 w-3.5" />}
-            </Button>
             <Button variant="ghost" size="sm" onClick={() => toggleStatus("team", t.id, t.status)}>
               {t.status === "active" ? <Eye className="h-3.5 w-3.5" /> : <EyeOff className="h-3.5 w-3.5 text-destructive" />}
             </Button>
@@ -81,9 +72,6 @@ export default function Admin() {
         {vehicles?.map((v) => (
           <div key={v.id} className="surface-card rounded-lg p-3 flex items-center gap-2">
             <span className="flex-1 text-sm font-semibold truncate">{v.name} <span className="caption-text">· {v.teams?.name}</span></span>
-            <Button variant="ghost" size="sm" onClick={() => toggleFeatured("vehicle", v.id, v.featured)}>
-              {v.featured ? <Star className="h-3.5 w-3.5 text-primary" /> : <StarOff className="h-3.5 w-3.5" />}
-            </Button>
             <Button variant="ghost" size="sm" onClick={() => toggleStatus("vehicle", v.id, v.status)}>
               {v.status === "active" ? <Eye className="h-3.5 w-3.5" /> : <EyeOff className="h-3.5 w-3.5 text-destructive" />}
             </Button>

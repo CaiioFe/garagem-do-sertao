@@ -6,7 +6,7 @@ export function useTeams() {
   return useQuery({
     queryKey: ["teams"],
     queryFn: async (): Promise<Team[]> => {
-      const { data, error } = await supabase.from("teams").select("*").order("featured", { ascending: false }).order("name");
+      const { data, error } = await supabase.from("teams").select("*").order("name");
       if (error) throw error;
       return data as Team[];
     },

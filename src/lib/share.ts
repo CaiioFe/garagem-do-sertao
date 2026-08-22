@@ -22,7 +22,7 @@ export async function shareCard(el: HTMLElement, filename: string, text: string)
 
   if (navigator.canShare?.({ files: [file] })) {
     try {
-      await navigator.share({ files: [file], title: "Trunfo do Sertão", text });
+      await navigator.share({ files: [file], title: "Garagem do Sertão", text });
       return true;
     } catch {
       return false;

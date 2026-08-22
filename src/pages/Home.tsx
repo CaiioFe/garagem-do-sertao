@@ -11,7 +11,6 @@ import { LayoutGrid, Users, Scale, BookOpen, Plane, Sparkles } from "lucide-reac
 export default function Home() {
   const { data: vehicles } = useVehicles();
   const total = vehicles?.length ?? 0;
-  const featured = (vehicles ?? []).filter((v) => v.featured).slice(0, 4);
   const latest = [...(vehicles ?? [])].sort((a, b) => b.card_number - a.card_number).slice(0, 4);
   const dayCard = total > 0 ? vehicles![dayOfIndex(todayISO(), total)] : null;
   const dLargada = daysUntil(EVENT.start);
@@ -22,7 +21,7 @@ export default function Home() {
       <section className="container pt-6 pb-5">
         <p className="label-text text-primary mb-1">Não oficial · feito por fãs</p>
         <h1 className="heading-xl">
-          Trunfo <span className="text-primary">do Sertão</span>
+          Garagem <span className="text-primary">do Sertão</span>
         </h1>
         <p className="body-text mt-2 max-w-md">
           As cartas colecionáveis das equipes do {EVENT.name}. Cadastre seu veículo, compare, colecione.
@@ -77,22 +76,6 @@ export default function Home() {
         </div>
       </section>
 
-      {featured.length > 0 && (
-        <section className="mb-6">
-          <div className="container flex items-center justify-between mb-2">
-            <h2 className="heading-md !text-base">Destaques</h2>
-            <Link to="/cartas" className="caption-text text-primary">ver todas</Link>
-          </div>
-          <div className="flex gap-3 overflow-x-auto no-scrollbar px-4">
-            {featured.map((v) => (
-              <Link key={v.id} to={`/carta/${v.slug}`} className="w-[42vw] shrink-0 max-w-[180px]">
-                <TrunfoCard vehicle={v} totalCount={total} interactive={false} />
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
-
       {latest.length > 0 && (
         <section className="mb-6">
           <div className="container flex items-center justify-between mb-2">
@@ -128,7 +111,7 @@ export default function Home() {
 
       <footer className="container py-6 text-center">
         <p className="caption-text !text-[11px]">
-          Trunfo do Sertão é um projeto independente, não oficial, feito por fãs. Não tem vínculo com a organização do rally.
+          Garagem do Sertão é um projeto independente, não oficial, feito por fãs. Não tem vínculo com a organização do rally.
         </p>
       </footer>
     </div>

@@ -53,7 +53,7 @@ export function TrunfoCard({ vehicle, totalCount, interactive = true, className 
   return (
     <div
       ref={ref}
-      className={cn("tcard", vehicle.featured ? "tier-lendaria" : "tier-comum", active && "is-active", className)}
+      className={cn("tcard", "tier-lendaria", active && "is-active", className)}
       onPointerMove={interactive ? (e) => { setActive(true); onMove(e.clientX, e.clientY); } : undefined}
       onPointerLeave={interactive ? reset : undefined}
       onPointerDown={interactive ? (e) => { setActive(true); onMove(e.clientX, e.clientY); } : undefined}

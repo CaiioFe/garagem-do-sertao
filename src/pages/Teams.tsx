@@ -28,7 +28,7 @@ export default function Teams() {
                 <p className="font-display font-bold uppercase italic text-base leading-tight truncate">{t.name}</p>
                 <p className="caption-text !text-xs truncate">{[t.city, t.state].filter(Boolean).join(" · ") || "Cidade não informada"}</p>
               </div>
-              {t.featured && <span className="label-text text-primary shrink-0">Destaque</span>}
+              
             </Link>
           ))}
         </div>

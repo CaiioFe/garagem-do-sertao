@@ -72,7 +72,7 @@ export default function Register() {
   };
 
   if (result) {
-    const wa = `https://wa.me/?text=${encodeURIComponent(`Meu código de edição do Trunfo do Sertão: ${result.token}\n${window.location.origin}/equipe/${result.teamSlug}`)}`;
+    const wa = `https://wa.me/?text=${encodeURIComponent(`Meu código de edição da Garagem do Sertão: ${result.token}\n${window.location.origin}/equipe/${result.teamSlug}`)}`;
     return (
       <div className="container py-10 max-w-sm text-center">
         <PartyPopper className="h-12 w-12 text-primary mx-auto mb-3" />

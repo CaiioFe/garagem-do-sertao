@@ -70,7 +70,7 @@ export default function CardDetail() {
   const doShare = async () => {
     if (!cardRef.current) return;
     setSharing(true);
-    const ok = await shareCard(cardRef.current, `${vehicle.slug}.png`, `${vehicle.name} — Trunfo do Sertão`);
+    const ok = await shareCard(cardRef.current, `${vehicle.slug}.png`, `${vehicle.name} · Garagem do Sertão`);
     setSharing(false);
     if (!ok) toast.error("Não deu pra compartilhar. Tente baixar a carta.");
   };

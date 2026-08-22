@@ -9,7 +9,7 @@ export function Header() {
         <Link to="/" className="flex items-center gap-2">
           <span className="h-7 w-7 rounded-sm stripes shrink-0" />
           <span className="font-display font-extrabold uppercase italic tracking-tight text-lg leading-none">
-            Trunfo <span className="text-primary">do Sertão</span>
+            Garagem <span className="text-primary">do Sertão</span>
           </span>
         </Link>
         <div className="flex items-center gap-2">
