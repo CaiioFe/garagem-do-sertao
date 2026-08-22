@@ -86,10 +86,10 @@ export function TrunfoCard({ vehicle, totalCount, interactive = true, className 
             {vehicle.navigator_name ? ` · ${vehicle.navigator_name}` : ""}
           </p>
 
-          <div className="flex-1 min-h-0 flex flex-wrap content-start gap-1">
+          <div className="flex-1 min-h-0 overflow-hidden flex flex-wrap content-start gap-1">
             {facts.length > 0 ? (
-              facts.slice(0, 3).map((f) => (
-                <span key={f.key} className="rounded-sm bg-muted/40 px-1.5 py-0.5 caption-text !text-[9px] leading-tight">
+              facts.slice(0, 2).map((f) => (
+                <span key={f.key} className="max-w-full truncate rounded-sm bg-muted/40 px-1.5 py-0.5 caption-text !text-[9px] leading-tight">
                   {f.label}
                 </span>
               ))
@@ -98,7 +98,7 @@ export function TrunfoCard({ vehicle, totalCount, interactive = true, className 
             )}
           </div>
 
-          <div className="mt-1.5 flex items-center justify-between border-t border-border/60 pt-1.5">
+          <div className="shrink-0 mt-1.5 flex items-center justify-between border-t border-border/60 pt-1.5">
             <span className="caption-text !text-[10px] truncate">{vehicle.teams?.name}</span>
             {hasTitle && <Trophy className="h-3 w-3 text-rarity-lendaria shrink-0" />}
           </div>
