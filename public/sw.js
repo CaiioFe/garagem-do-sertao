@@ -1,39 +1,14 @@
-const CACHE_NAME = 'trunfo-sertao-v1';
-const PRECACHE_URLS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/favicon.svg',
-  '/icon-192.png',
-  '/icon-512.png',
-];
-
-self.addEventListener('install', (event) => {
+// Kill switch: desinstala qualquer service worker antigo que ainda esteja
+// ativo em algum aparelho. Não cacheia mais nada (ver src/main.tsx).
+self.addEventListener("install", () => self.skipWaiting());
+self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_URLS))
-  );
-  self.skipWaiting();
-});
-
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
-    )
-  );
-  self.clients.claim();
-});
-
-self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET') return;
-
-  event.respondWith(
-    fetch(event.request)
-      .then((response) => {
-        const clone = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
-        return response;
-      })
-      .catch(() => caches.match(event.request))
+    (async () => {
+      const names = await caches.keys();
+      await Promise.all(names.map((n) => caches.delete(n)));
+      await self.registration.unregister();
+      const clientsList = await self.clients.matchAll({ type: "window" });
+      clientsList.forEach((c) => c.navigate(c.url));
+    })(),
   );
 });
