@@ -3,9 +3,7 @@ import { Link, useParams, useSearchParams, useNavigate } from "react-router-dom"
 import { useQueryClient } from "@tanstack/react-query";
 import { useVehicle, useVehicles } from "@/hooks/useVehicles";
 import { TrunfoCard } from "@/components/card/TrunfoCard";
-import { AttrBar } from "@/components/card/AttrBar";
-import { computeAttributes, computeRarity, computeCompleteness, getCategory, TIER_LABEL } from "@/lib/trunfo";
-import { TIER_TEXT_CLASS } from "@/components/card/TrunfoCard";
+import { getFacts, getSpecRows } from "@/lib/trunfo";
 import { addToCollection, isInCollection, getFingerprint, isOwner } from "@/lib/storage";
 import { shareCard } from "@/lib/share";
 import { supabase } from "@/lib/supabase";
@@ -48,10 +46,8 @@ export default function CardDetail() {
   if (isLoading) return <div className="container py-16 text-center caption-text">Carregando carta...</div>;
   if (!vehicle) return <div className="container py-16 text-center body-text">Carta não encontrada.</div>;
 
-  const category = getCategory(vehicle.category_id);
-  const attrs = computeAttributes(vehicle.specs ?? {}, vehicle.history ?? {}, category);
-  const completeness = computeCompleteness(vehicle);
-  const { tier, score } = computeRarity(vehicle.history ?? {}, category, completeness);
+  const facts = getFacts(vehicle.history ?? {});
+  const specRows = getSpecRows(vehicle.specs ?? {});
   const owner = isOwner(vehicle.team_id);
   const cardUrl = `${window.location.origin}/carta/${vehicle.slug}`;
 
@@ -118,15 +114,32 @@ export default function CardDetail() {
         )}
       </div>
 
-      <div className="surface-card rounded-lg p-4 mb-4">
-        <div className="flex items-center justify-between mb-3">
-          <span className="label-text">Raridade</span>
-          <span className={`font-display font-bold uppercase italic ${TIER_TEXT_CLASS[tier]}`}>{TIER_LABEL[tier]} · {score}</span>
+      {facts.length > 0 && (
+        <div className="surface-card rounded-lg p-4 mb-4">
+          <p className="label-text mb-2.5">Histórico</p>
+          <div className="flex flex-wrap gap-1.5">
+            {facts.map((f) => (
+              <span key={f.key} className="rounded-sm bg-muted/40 px-2 py-1 caption-text !text-xs">
+                {f.label}
+              </span>
+            ))}
+          </div>
         </div>
-        <div className="space-y-2.5">
-          {attrs.map((a) => <AttrBar key={a.key} attr={a} />)}
+      )}
+
+      {specRows.length > 0 && (
+        <div className="surface-card rounded-lg p-4 mb-4">
+          <p className="label-text mb-2.5">Ficha técnica <span className="normal-case text-muted-foreground">· informada pela equipe</span></p>
+          <div className="space-y-1.5">
+            {specRows.map((s) => (
+              <div key={s.key} className="flex items-center justify-between">
+                <span className="caption-text !text-sm">{s.label}</span>
+                <span className="num text-sm font-semibold">{s.value}</span>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {vehicle.description && (
         <div className="surface-card rounded-lg p-4 mb-4">
