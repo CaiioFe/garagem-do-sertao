@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useTeams } from "@/hooks/useTeams";
-import { OptimizedImage } from "@/components/ui/optimized-image";
 import { Users } from "lucide-react";
 
 export default function Teams() {
@@ -17,9 +16,9 @@ export default function Teams() {
         <div className="space-y-2">
           {teams?.map((t) => (
             <Link key={t.id} to={`/equipe/${t.slug}`} className="surface-card rounded-lg p-3 flex items-center gap-3 hover:surface-elevated transition-colors">
-              <div className="h-14 w-14 rounded-md overflow-hidden shrink-0 bg-surface-elevated flex items-center justify-center">
+              <div className="h-14 w-14 rounded-md overflow-hidden shrink-0 bg-white flex items-center justify-center p-1.5">
                 {t.logo_url ? (
-                  <OptimizedImage src={t.logo_url} alt={t.name} className="h-full w-full" />
+                  <img src={t.logo_url} alt={t.name} className="h-full w-full object-contain" loading="lazy" />
                 ) : (
                   <Users className="h-6 w-6 text-muted-foreground/40" />
                 )}

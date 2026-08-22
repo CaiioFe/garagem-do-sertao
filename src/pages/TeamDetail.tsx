@@ -3,7 +3,6 @@ import { Link, useParams } from "react-router-dom";
 import { useTeam } from "@/hooks/useTeams";
 import { useTeamVehicles } from "@/hooks/useVehicles";
 import { TrunfoCard } from "@/components/card/TrunfoCard";
-import { OptimizedImage } from "@/components/ui/optimized-image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { isOwner, setOwnedToken } from "@/lib/storage";
@@ -46,8 +45,8 @@ export default function TeamDetail() {
   return (
     <div className="container py-6">
       <div className="flex items-start gap-3 mb-3">
-        <div className="h-16 w-16 rounded-md overflow-hidden shrink-0 bg-surface-elevated flex items-center justify-center">
-          {team.logo_url ? <OptimizedImage src={team.logo_url} alt={team.name} className="h-full w-full" /> : <Users className="h-7 w-7 text-muted-foreground/40" />}
+        <div className="h-16 w-16 rounded-md overflow-hidden shrink-0 bg-white flex items-center justify-center p-2">
+          {team.logo_url ? <img src={team.logo_url} alt={team.name} className="h-full w-full object-contain" loading="lazy" /> : <Users className="h-7 w-7 text-muted-foreground/40" />}
         </div>
         <div className="min-w-0 flex-1">
           <h1 className="heading-lg !text-2xl">{team.name}</h1>
