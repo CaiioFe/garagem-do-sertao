@@ -39,7 +39,7 @@ export default function Home() {
             <>
               <p className="label-text text-primary">Hoje</p>
               <p className="font-display font-bold uppercase italic text-lg leading-tight mt-0.5">
-                Prólogo e Super Prime — Citàge Santé, 7h e 14h
+                Prólogo e Super Prime · Citàge Santé, 7h e 14h
               </p>
             </>
           ) : (
