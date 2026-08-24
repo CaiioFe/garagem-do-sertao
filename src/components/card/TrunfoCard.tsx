@@ -69,7 +69,7 @@ export function TrunfoCard({ vehicle, totalCount, interactive = true, className 
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent" />
           <div className="absolute top-2 left-2 rounded-sm bg-background/70 backdrop-blur px-2 py-0.5">
-            <span className="label-text !text-[9px]">{category.short}</span>
+            <span className="label-text !text-[9px]">{vehicle.result?.category_code ?? category.short}</span>
           </div>
           <div className="absolute bottom-1.5 right-2 num text-[10px] text-foreground/60 tabular-nums">
             #{String(vehicle.card_number).padStart(3, "0")}
