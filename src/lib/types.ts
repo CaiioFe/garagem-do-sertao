@@ -1,4 +1,4 @@
-import type { VehicleSpecs, VehicleHistory } from "./trunfo";
+import type { VehicleSpecs, VehicleHistory, VehicleResult } from "./trunfo";
 
 export interface Team {
   id: string;
@@ -43,6 +43,7 @@ export interface Vehicle {
   navigator_photo_url: string | null;
   specs: VehicleSpecs;
   history: VehicleHistory;
+  result: VehicleResult | null;
   description: string | null;
   sponsors: string[];
   likes_count: number;

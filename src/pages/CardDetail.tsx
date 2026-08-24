@@ -109,6 +109,63 @@ export default function CardDetail() {
         )}
       </div>
 
+      {vehicle.result && (
+        <div className="surface-card rounded-lg p-4 mb-4">
+          <div className="flex items-center justify-between mb-3">
+            <p className="label-text">
+              Resultado oficial{vehicle.race_number ? ` · Nº ${vehicle.race_number}` : ""}
+            </p>
+            {vehicle.result.stage_label && <span className="caption-text !text-xs">{vehicle.result.stage_label}</span>}
+          </div>
+
+          <div className="flex items-end gap-6 mb-3">
+            {typeof vehicle.result.position_general === "number" && (
+              <div>
+                <p className="font-display font-black text-4xl italic text-primary leading-none">{vehicle.result.position_general}º</p>
+                <p className="label-text !text-[9px] mt-1">geral</p>
+              </div>
+            )}
+            {typeof vehicle.result.position_category === "number" && (
+              <div>
+                <p className="font-display font-black text-2xl italic leading-none">{vehicle.result.position_category}º</p>
+                <p className="label-text !text-[9px] mt-1">{vehicle.result.category_code ?? "categoria"}</p>
+              </div>
+            )}
+          </div>
+
+          <div className="space-y-1.5">
+            {vehicle.result.time && (
+              <div className="flex items-center justify-between">
+                <span className="caption-text !text-sm">Tempo</span>
+                <span className="num text-sm font-semibold">{vehicle.result.time}</span>
+              </div>
+            )}
+            {vehicle.result.gap_leader && (
+              <div className="flex items-center justify-between">
+                <span className="caption-text !text-sm">Diferença pro líder</span>
+                <span className="num text-sm font-semibold">{vehicle.result.gap_leader === "LIDER" ? "Líder" : vehicle.result.gap_leader}</span>
+              </div>
+            )}
+            {typeof vehicle.result.penalty_min === "number" && (
+              <div className="flex items-center justify-between">
+                <span className="caption-text !text-sm">Penalidade</span>
+                <span className="num text-sm font-semibold">{vehicle.result.penalty_min} min</span>
+              </div>
+            )}
+          </div>
+
+          {vehicle.result.team_official_name && vehicle.result.team_official_name !== vehicle.teams?.name && (
+            <p className="caption-text !text-[11px] mt-3 text-muted-foreground">
+              Inscrita oficialmente no rally como "{vehicle.result.team_official_name}"
+            </p>
+          )}
+
+          <p className="caption-text !text-[10px] mt-3 text-muted-foreground/60">
+            Cronometragem oficial, resultados.sertoes.com.br
+          </p>
+        </div>
+      )}
+
       {facts.length > 0 && (
         <div className="surface-card rounded-lg p-4 mb-4">
           <p className="label-text mb-2.5">Histórico</p>

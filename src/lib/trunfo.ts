@@ -21,6 +21,18 @@ export interface Fact {
   label: string;
 }
 
+export interface VehicleResult {
+  stage_label?: string;
+  category_code?: string;
+  position_general?: number;
+  position_category?: number;
+  time?: string;
+  gap_leader?: string;
+  penalty_min?: number;
+  team_official_name?: string;
+  source?: string;
+}
+
 // Só entra aqui o que é fato real (histórico pesquisado ou informado pela própria equipe).
 // Nunca inventa número pra "preencher" um card.
 export function getFacts(history: VehicleHistory): Fact[] {
