@@ -14,6 +14,7 @@ const TeamEdit = lazy(() => import("./pages/TeamEdit"));
 const VehicleEdit = lazy(() => import("./pages/VehicleEdit"));
 const Collection = lazy(() => import("./pages/Collection"));
 const Guide = lazy(() => import("./pages/Guide"));
+const Resultados = lazy(() => import("./pages/Resultados"));
 const Expeditions = lazy(() => import("./pages/Expeditions"));
 const Admin = lazy(() => import("./pages/Admin"));
 const Qr = lazy(() => import("./pages/Qr"));
@@ -45,6 +46,7 @@ const AppRoutes = () => (
       <Route path="/cadastrar" element={<Register />} />
       <Route path="/colecao" element={<Collection />} />
       <Route path="/guia" element={<Guide />} />
+      <Route path="/resultados" element={<Resultados />} />
       <Route path="/expedicoes" element={<Expeditions />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="/qr" element={<Qr />} />

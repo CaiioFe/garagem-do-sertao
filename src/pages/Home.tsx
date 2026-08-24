@@ -8,7 +8,7 @@ import { EVENT } from "@/data/stages";
 import { PARTNERS } from "@/data/partners";
 import { dayOfIndex } from "@/lib/trunfo";
 import { todayISO, daysUntil } from "@/lib/dates";
-import { Users, LayoutGrid, BookOpen, Plane, Sparkles } from "lucide-react";
+import { Users, LayoutGrid, BookOpen, Plane, Sparkles, Trophy, Flag } from "lucide-react";
 
 export default function Home() {
   const { data: vehicles } = useVehicles();
@@ -18,6 +18,10 @@ export default function Home() {
   const dayVehicle = total > 0 ? vehicles![dayOfIndex(todayISO(), total)] : null;
   const dLargada = daysUntil(EVENT.start);
   const partner = PARTNERS.find((p) => p.featured);
+  const ranked = [...(vehicles ?? [])]
+    .filter((v) => typeof v.result?.position_general === "number")
+    .sort((a, b) => a.result!.position_general! - b.result!.position_general!);
+  const topResult = ranked[0];
 
   return (
     <div className="pb-4">
@@ -62,9 +66,10 @@ export default function Home() {
       <InstallBanner />
 
       <section className="container mb-6">
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-5 gap-2">
           <QuickLink to="/equipes" icon={Users} label="Equipes" />
           <QuickLink to="/cartas" icon={LayoutGrid} label="Veículos" />
+          <QuickLink to="/resultados" icon={Flag} label="Resultados" />
           <QuickLink to="/guia" icon={BookOpen} label="Guia" />
           <QuickLink to="/expedicoes" icon={Plane} label="Expedições" />
         </div>
@@ -105,6 +110,39 @@ export default function Home() {
           <Link to="/cadastrar"><Button className="mt-3">Cadastrar equipe</Button></Link>
         </div>
       </section>
+
+      {topResult && (
+        <section className="container mb-6">
+          <div className="flex items-center justify-between mb-2">
+            <p className="label-text text-primary flex items-center gap-1.5">
+              <Trophy className="h-3.5 w-3.5" /> Como estamos indo
+            </p>
+            <Link to="/resultados" className="caption-text text-primary shrink-0">ver todos</Link>
+          </div>
+          <Link
+            to={`/carta/${topResult.slug}`}
+            className="relative overflow-hidden surface-elevated ring-1 ring-[hsl(var(--rarity-lendaria))]/50 rounded-lg p-3 flex items-center gap-3"
+          >
+            <div
+              className="absolute inset-0 pointer-events-none opacity-15"
+              style={{ background: "radial-gradient(circle at 0% 0%, hsl(var(--rarity-lendaria)), transparent 60%)" }}
+            />
+            <div className="relative h-11 w-11 rounded-full shrink-0 flex items-center justify-center font-display font-black italic text-base leading-none bg-[hsl(var(--rarity-lendaria))] text-background">
+              {topResult.result!.position_general}º
+            </div>
+            <div className="relative min-w-0 flex-1">
+              <p className="font-display font-bold uppercase italic text-sm leading-tight truncate">{topResult.name}</p>
+              <p className="caption-text !text-[11px] truncate">
+                {topResult.teams?.name}
+                {topResult.result!.category_code ? ` · ${topResult.result!.category_code}` : ""}
+              </p>
+            </div>
+            <span className="relative label-text !text-[9px] text-[hsl(var(--rarity-lendaria))]">
+              {topResult.result!.position_general === 1 ? "líder" : "melhor colocado"}
+            </span>
+          </Link>
+        </section>
+      )}
 
       {dayVehicle && (
         <section className="container mb-6">
