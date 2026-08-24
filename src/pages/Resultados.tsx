@@ -18,7 +18,7 @@ export default function Resultados() {
       <p className="label-text text-primary mb-1">Nossa garagem no rally</p>
       <h1 className="heading-lg">Resultados{stageLabel ? ` · ${stageLabel}` : ""}</h1>
       <p className="body-text !text-sm mt-1 mb-5 max-w-md">
-        Como estão indo os veículos cadastrados aqui, direto da cronometragem oficial.
+        Como estão indo os veículos cadastrados aqui, por categoria, direto da cronometragem oficial.
       </p>
 
       {isLoading ? (
@@ -78,7 +78,7 @@ export default function Resultados() {
                 <div className="relative text-right shrink-0">
                   {isLeader ? (
                     <span className="label-text !text-[9px] text-[hsl(var(--rarity-lendaria))] flex items-center gap-1">
-                      <Trophy className="h-3 w-3" /> líder
+                      <Trophy className="h-3 w-3" /> líder{r.category_code ? ` · ${r.category_code}` : ""}
                     </span>
                   ) : (
                     <span className="num text-xs font-semibold">{r.gap_leader ?? "—"}</span>
