@@ -17,7 +17,7 @@ export function Sidebar() {
       <Link to="/" className="flex items-center gap-2 mb-8 px-2">
         <span className="h-8 w-8 rounded-sm stripes shrink-0" />
         <span className="font-display font-extrabold uppercase italic tracking-tight text-base leading-[1.05]">
-          Garagem<br /><span className="text-primary">do Sertão</span>
+          Garagem<br /><span className="text-primary">dos Sertões</span>
         </span>
       </Link>
 

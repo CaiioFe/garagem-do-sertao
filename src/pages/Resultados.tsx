@@ -91,7 +91,7 @@ export default function Resultados() {
       )}
 
       <p className="caption-text !text-[10px] text-muted-foreground/60 mt-6 text-center">
-        Cronometragem oficial, resultados.sertoes.com.br · só os veículos cadastrados na Garagem do Sertão.
+        Cronometragem oficial, resultados.sertoes.com.br · só os veículos cadastrados na Garagem dos Sertões.
       </p>
     </div>
   );

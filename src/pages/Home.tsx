@@ -28,7 +28,7 @@ export default function Home() {
       <section className="container pt-6 pb-5">
         <p className="label-text text-primary mb-1">Não oficial · feito por fãs</p>
         <h1 className="heading-xl">
-          Garagem <span className="text-primary">do Sertão</span>
+          Garagem <span className="text-primary">dos Sertões</span>
         </h1>
         <p className="body-text mt-2 max-w-md">
           As equipes e os veículos do {EVENT.name}. Conheça quem está correndo e acompanhe a prova.
@@ -183,7 +183,7 @@ export default function Home() {
 
       <footer className="container py-6 text-center">
         <p className="caption-text !text-[11px]">
-          Garagem do Sertão é um projeto independente, não oficial, feito por fãs. Não tem vínculo com a organização do rally.
+          Garagem dos Sertões é um projeto independente, não oficial, feito por fãs. Não tem vínculo com a organização do rally.
         </p>
       </footer>
     </div>
