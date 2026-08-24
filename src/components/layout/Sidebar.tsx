@@ -1,11 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
-import { Home, Users, LayoutGrid, BookOpen, Plane, Plus } from "lucide-react";
+import { Home, Users, LayoutGrid, Flag, BookOpen, Plane, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const items = [
   { to: "/", label: "Início", icon: Home, end: true },
   { to: "/equipes", label: "Equipes", icon: Users },
   { to: "/cartas", label: "Veículos", icon: LayoutGrid },
+  { to: "/resultados", label: "Resultados", icon: Flag },
   { to: "/guia", label: "Guia", icon: BookOpen },
   { to: "/expedicoes", label: "Expedições", icon: Plane },
 ];
