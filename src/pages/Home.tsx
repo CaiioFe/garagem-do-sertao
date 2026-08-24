@@ -72,13 +72,25 @@ export default function Home() {
 
       {teams && teams.length > 0 && (
         <section className="mb-6">
-          <div className="container flex items-center justify-between mb-2">
+          <div className="container flex items-center justify-between mb-1">
             <h2 className="heading-md !text-base">Equipes cadastradas</h2>
-            <Link to="/equipes" className="caption-text text-primary">ver todas</Link>
+            <Link to="/equipes" className="caption-text text-primary shrink-0">ver todas</Link>
           </div>
-          <div className="flex gap-2 overflow-x-auto no-scrollbar px-4">
+          <p className="container caption-text !text-xs mb-2">Times reais do {EVENT.name}, com foto e histórico de cada carro.</p>
+          <div className="container flex gap-2 overflow-x-auto no-scrollbar">
             {teams.slice(0, 8).map((t) => (
-              <Link key={t.id} to={`/equipe/${t.slug}`} className="shrink-0 surface-card rounded-full px-3.5 py-2">
+              <Link
+                key={t.id}
+                to={`/equipe/${t.slug}`}
+                className="shrink-0 surface-card rounded-full pl-2 pr-3.5 py-2 flex items-center gap-2"
+              >
+                <span className="h-6 w-6 rounded-full bg-white overflow-hidden shrink-0 flex items-center justify-center">
+                  {t.logo_url ? (
+                    <img src={t.logo_url} alt="" className="h-full w-full object-contain" loading="lazy" />
+                  ) : (
+                    <Users className="h-3 w-3 text-background/50" />
+                  )}
+                </span>
                 <span className="text-xs font-semibold whitespace-nowrap">{t.name}</span>
               </Link>
             ))}
@@ -111,7 +123,7 @@ export default function Home() {
             <h2 className="heading-md !text-base">Últimos veículos</h2>
             <Link to="/cartas" className="caption-text text-primary">ver todos</Link>
           </div>
-          <div className="flex gap-3 overflow-x-auto no-scrollbar px-4">
+          <div className="container flex gap-3 overflow-x-auto no-scrollbar">
             {latest.map((v) => (
               <Link key={v.id} to={`/carta/${v.slug}`} className="w-[42vw] shrink-0 max-w-[180px]">
                 <TrunfoCard vehicle={v} totalCount={total} interactive={false} />
