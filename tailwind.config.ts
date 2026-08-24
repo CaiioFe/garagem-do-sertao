@@ -4,7 +4,11 @@ export default {
   darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
   theme: {
-    container: { center: true, padding: "1rem", screens: { "2xl": "1200px" } },
+    container: {
+      center: true,
+      padding: "1rem",
+      screens: { sm: "560px", md: "700px", lg: "820px", xl: "900px", "2xl": "960px" },
+    },
     extend: {
       fontFamily: {
         display: ['"Barlow Condensed"', "sans-serif"],

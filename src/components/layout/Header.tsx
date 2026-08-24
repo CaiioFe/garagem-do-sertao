@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 export function Header() {
   return (
     <header className="sticky top-0 z-40 surface-elevated/95 backdrop-blur border-b border-border safe-top">
-      <div className="container flex h-16 items-center justify-between">
-        <Link to="/" className="flex items-center gap-2">
+      <div className="container flex h-16 items-center justify-between md:justify-end">
+        <Link to="/" className="flex items-center gap-2 md:hidden">
           <span className="h-7 w-7 rounded-sm stripes shrink-0" />
           <span className="font-display font-extrabold uppercase italic tracking-tight text-lg leading-none">
             Garagem <span className="text-primary">do Sertão</span>

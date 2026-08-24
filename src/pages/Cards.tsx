@@ -30,13 +30,13 @@ export default function Cards() {
       </div>
 
       {isLoading ? (
-        <div className="grid grid-cols-2 gap-3 mt-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-3">
           {Array.from({ length: 6 }).map((_, i) => <div key={i} className="tcard animate-pulse bg-surface" />)}
         </div>
       ) : filtered.length === 0 ? (
         <p className="body-text text-center py-16">Nenhum veículo por aqui ainda.</p>
       ) : (
-        <div className="grid grid-cols-2 gap-3 mt-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-3">
           {filtered.map((v) => (
             <Link key={v.id} to={`/carta/${v.slug}`}>
               <TrunfoCard vehicle={v} totalCount={vehicles?.length} interactive={false} />

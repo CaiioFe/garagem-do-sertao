@@ -40,7 +40,7 @@ export default function Expeditions() {
       </div>
 
       <h2 className="label-text mb-2">Outros operadores homologados</h2>
-      <div className="grid grid-cols-2 gap-2 mb-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mb-6">
         {rest.map((p) => (
           <div key={p.id} className="surface-card rounded-lg p-3">
             <p className="text-sm font-semibold leading-tight">{p.name}</p>

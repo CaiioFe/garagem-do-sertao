@@ -58,7 +58,7 @@ export default function Collection() {
           <Link to="/cartas"><Button className="mt-4">Ver todos os veículos</Button></Link>
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {owned.map((v) => (
             <Link key={v.id} to={`/carta/${v.slug}`}>
               <TrunfoCard vehicle={v} totalCount={total} interactive={false} />

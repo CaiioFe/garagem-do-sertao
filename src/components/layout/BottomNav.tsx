@@ -12,7 +12,7 @@ const items = [
 
 export function BottomNav() {
   return (
-    <nav className="fixed bottom-0 inset-x-0 z-40 surface-elevated border-t border-border pb-[env(safe-area-inset-bottom)]">
+    <nav className="md:hidden fixed bottom-0 inset-x-0 z-40 surface-elevated border-t border-border pb-[env(safe-area-inset-bottom)]">
       <div className="grid grid-cols-5">
         {items.map(({ to, label, icon: Icon, end }) => (
           <NavLink

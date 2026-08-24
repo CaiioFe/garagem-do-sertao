@@ -100,7 +100,7 @@ export default function TeamDetail() {
       {!vehicles || vehicles.length === 0 ? (
         <p className="body-text py-8 text-center">Ainda sem veículos cadastrados.</p>
       ) : (
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {vehicles.map((v) => (
             <Link key={v.id} to={`/carta/${v.slug}`}>
               <TrunfoCard vehicle={v} interactive={false} />
