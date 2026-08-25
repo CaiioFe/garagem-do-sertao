@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { isOwner, setOwnedToken } from "@/lib/storage";
 import { trackView } from "@/lib/track";
 import { supabase } from "@/lib/supabase";
-import { Instagram, MessageCircle, Globe, Users, Plus, Pencil, KeyRound } from "lucide-react";
+import { Instagram, MessageCircle, Globe, Users, Plus, Pencil, KeyRound, AlertTriangle } from "lucide-react";
 import { toast } from "sonner";
 
 export default function TeamDetail() {
@@ -71,6 +71,20 @@ export default function TeamDetail() {
           </a>
         )}
       </div>
+
+      {!team.verified && (
+        <div className="rounded-lg bg-accent/10 ring-1 ring-accent/30 p-3 mb-4 flex items-start gap-2.5">
+          <AlertTriangle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+          <p className="caption-text !text-xs">
+            Cadastro inicial feito pela imprensa, ainda não confirmado pela equipe. Dados e fotos podem estar
+            desatualizados ou trocados. Se você é dessa equipe,{" "}
+            <button onClick={() => setClaiming(true)} className="font-semibold text-primary underline underline-offset-2">
+              reivindique o perfil
+            </button>{" "}
+            pra corrigir.
+          </p>
+        </div>
+      )}
 
       {team.description && <p className="body-text mb-5">{team.description}</p>}
 

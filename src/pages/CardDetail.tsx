@@ -228,6 +228,11 @@ export default function CardDetail() {
         <Link to={`/equipe/${vehicle.teams?.slug}`} className="font-display font-bold uppercase italic text-lg text-primary">
           {vehicle.teams?.name}
         </Link>
+        {vehicle.teams && !vehicle.teams.verified && (
+          <p className="caption-text !text-[11px] mt-1.5 text-muted-foreground">
+            Cadastro inicial pela imprensa, ainda não confirmado pela equipe.
+          </p>
+        )}
       </div>
 
       <div className="surface-card rounded-lg p-4 flex items-center gap-4">

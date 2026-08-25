@@ -19,6 +19,7 @@ export interface Team {
   titles_category: number;
   featured: boolean;
   status: "active" | "hidden";
+  verified: boolean;
   created_at: string;
   updated_at: string;
 }
@@ -51,5 +52,5 @@ export interface Vehicle {
   status: "active" | "hidden";
   created_at: string;
   updated_at: string;
-  teams?: Pick<Team, "id" | "slug" | "name" | "city" | "state" | "logo_url">;
+  teams?: Pick<Team, "id" | "slug" | "name" | "city" | "state" | "logo_url" | "verified">;
 }

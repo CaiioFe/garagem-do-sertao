@@ -26,8 +26,13 @@ export default function Teams() {
               <div className="min-w-0 flex-1">
                 <p className="font-display font-bold uppercase italic text-base leading-tight truncate">{t.name}</p>
                 <p className="caption-text !text-xs truncate">{[t.city, t.state].filter(Boolean).join(" · ") || "Cidade não informada"}</p>
+                {!t.verified && (
+                  <span className="inline-block mt-1 rounded-sm bg-accent/15 text-accent px-1.5 py-0.5 label-text !text-[8px]">
+                    não confirmada
+                  </span>
+                )}
               </div>
-              
+
             </Link>
           ))}
         </div>

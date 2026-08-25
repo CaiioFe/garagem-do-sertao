@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 import type { Vehicle } from "@/lib/types";
 
-const SELECT = "*, teams:team_id(id,slug,name,city,state,logo_url)";
+const SELECT = "*, teams:team_id(id,slug,name,city,state,logo_url,verified)";
 
 export function useVehicles() {
   return useQuery({
