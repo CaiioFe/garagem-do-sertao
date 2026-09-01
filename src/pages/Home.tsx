@@ -184,22 +184,12 @@ export default function Home() {
 
       <section className="container mb-6">
         <p className="label-text mb-2 flex items-center gap-1.5"><Droplets className="h-3.5 w-3.5" /> Impacto socioambiental</p>
-        <div className="surface-card rounded-lg p-3">
+        <Link to="/impacto" className="surface-card rounded-lg p-3 block">
           <p className="font-semibold text-sm">Instituto Sertões</p>
-          <p className="body-text !text-sm mt-1.5">
-            Desde 2022 o Instituto Sertões leva água potável, educação ambiental e ações sociais pras
-            comunidades no caminho do rally. Na edição 2026, a parceria com a Conasa Infraestrutura
-            distribuiu 520 filtros ConÁgua pra famílias de Goiás e Tocantins.
+          <p className="caption-text !text-xs mt-0.5">
+            Água potável, educação ambiental e ação social nas comunidades do caminho do rally, desde 2022.
           </p>
-          <a
-            href="https://www.vidamaissustentavel.com.br/2026/08/22/empresa-entregara-520-filtros-solidarios-durante-o-sertoes-2026/"
-            target="_blank"
-            rel="noreferrer"
-            className="caption-text !text-xs mt-2 inline-block text-primary underline underline-offset-2"
-          >
-            fonte: Vida Mais Sustentável
-          </a>
-        </div>
+        </Link>
       </section>
 
       <footer className="container py-6 text-center">
