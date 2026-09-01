@@ -2,7 +2,7 @@
 
 Site não oficial, feito por fã, com o perfil de cada equipe e cada veículo do Rally dos Sertões 2026: fotos reais, história, piloto e navegador, e o resultado oficial de cada etapa direto da cronometragem.
 
-🔗 **[garagemsertao.vercel.app](https://garagemsertao.vercel.app)**
+🔗 **[garagemsertoes.com.br](https://garagemsertoes.com.br)**
 
 ## Contexto
 
