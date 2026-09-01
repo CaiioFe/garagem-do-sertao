@@ -12,13 +12,16 @@ export default function Resultados() {
     .sort((a, b) => a.result!.position_general! - b.result!.position_general!);
 
   const stageLabel = ranked[0]?.result?.stage_label;
+  const isFinal = stageLabel === "Final";
 
   return (
     <div className="container py-6 max-w-lg">
       <p className="label-text text-primary mb-1">Nossa garagem no rally</p>
-      <h1 className="heading-lg">Resultados{stageLabel ? ` · ${stageLabel}` : ""}</h1>
+      <h1 className="heading-lg">{isFinal ? "Resultado final" : `Resultados${stageLabel ? ` · ${stageLabel}` : ""}`}</h1>
       <p className="body-text !text-sm mt-1 mb-5 max-w-md">
-        Como estão indo os veículos cadastrados aqui, por categoria, direto da cronometragem oficial.
+        {isFinal
+          ? "Como os veículos cadastrados aqui terminaram o rally, por categoria, direto da cronometragem oficial."
+          : "Como estão indo os veículos cadastrados aqui, por categoria, direto da cronometragem oficial."}
       </p>
 
       {isLoading ? (

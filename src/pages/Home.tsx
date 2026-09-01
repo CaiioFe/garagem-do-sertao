@@ -115,7 +115,8 @@ export default function Home() {
         <section className="container mb-6">
           <div className="flex items-center justify-between mb-2">
             <p className="label-text text-primary flex items-center gap-1.5">
-              <Trophy className="h-3.5 w-3.5" /> Como estamos indo
+              <Trophy className="h-3.5 w-3.5" />
+              {topResult.result?.stage_label === "Final" ? "Como terminamos" : "Como estamos indo"}
             </p>
             <Link to="/resultados" className="caption-text text-primary shrink-0">ver todos</Link>
           </div>
