@@ -8,7 +8,7 @@ import { EVENT } from "@/data/stages";
 import { PARTNERS } from "@/data/partners";
 import { dayOfIndex } from "@/lib/trunfo";
 import { todayISO, daysUntil } from "@/lib/dates";
-import { Users, LayoutGrid, BookOpen, Plane, Sparkles, Trophy, Flag } from "lucide-react";
+import { Users, LayoutGrid, BookOpen, Plane, Sparkles, Trophy, Flag, Droplets } from "lucide-react";
 
 export default function Home() {
   const { data: vehicles } = useVehicles();
@@ -181,6 +181,26 @@ export default function Home() {
           </Link>
         </section>
       )}
+
+      <section className="container mb-6">
+        <p className="label-text mb-2 flex items-center gap-1.5"><Droplets className="h-3.5 w-3.5" /> Impacto socioambiental</p>
+        <div className="surface-card rounded-lg p-3">
+          <p className="font-semibold text-sm">Instituto Sertões</p>
+          <p className="body-text !text-sm mt-1.5">
+            Desde 2022 o Instituto Sertões leva água potável, educação ambiental e ações sociais pras
+            comunidades no caminho do rally. Na edição 2026, a parceria com a Conasa Infraestrutura
+            distribuiu 520 filtros ConÁgua pra famílias de Goiás e Tocantins.
+          </p>
+          <a
+            href="https://www.vidamaissustentavel.com.br/2026/08/22/empresa-entregara-520-filtros-solidarios-durante-o-sertoes-2026/"
+            target="_blank"
+            rel="noreferrer"
+            className="caption-text !text-xs mt-2 inline-block text-primary underline underline-offset-2"
+          >
+            fonte: Vida Mais Sustentável
+          </a>
+        </div>
+      </section>
 
       <footer className="container py-6 text-center">
         <p className="caption-text !text-[11px]">
