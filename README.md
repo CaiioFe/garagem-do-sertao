@@ -4,6 +4,12 @@ Site não oficial, feito por fã, com o perfil de cada equipe e cada veículo do
 
 🔗 **[garagemsertoes.com.br](https://garagemsertoes.com.br)**
 
+<p>
+  <img src="docs/screenshot-home.png" width="32%" alt="Home do app" />
+  <img src="docs/screenshot-resultados.png" width="32%" alt="Tela de resultados" />
+  <img src="docs/screenshot-veiculo.png" width="32%" alt="Perfil de um veículo" />
+</p>
+
 ## Contexto
 
 O Rally dos Sertões é uma das provas de rali mais duras da América Latina: motos, UTVs e carros enfrentando milhares de km fora de estrada, em oito dias. Dá pra acompanhar a prova pela cronometragem oficial, mas é quase impossível achar de novo a equipe que você viu de perto, saber a história do carro, revisitar o piloto depois que ele já foi embora. A Garagem dos Sertões existe pra resolver essa parte: um lugar único com o perfil de cada veículo cadastrado.
