@@ -27,12 +27,12 @@ export function PhotoUpload({ folder, value, onChange, label = "Foto" }: PhotoUp
         fileType: "image/webp",
       });
       const path = `${folder}/${crypto.randomUUID()}.webp`;
-      const { error } = await supabase.storage.from("cards").upload(path, compressed, {
+      const { error } = await supabase.storage.from("garagem-cards").upload(path, compressed, {
         contentType: "image/webp",
         upsert: false,
       });
       if (error) throw error;
-      const { data } = supabase.storage.from("cards").getPublicUrl(path);
+      const { data } = supabase.storage.from("garagem-cards").getPublicUrl(path);
       onChange(data.publicUrl);
     } catch (e) {
       console.error(e);
